@@ -62,7 +62,7 @@ func Provider() terraform.ResourceProvider {
 		},
 
 		ResourcesMap: map[string]*schema.Resource{
-			"vault_secret": resourceVaultSecret(),
+			"vault_secret": dataSourceVaultSecret(),
 		},
 
 		ConfigureFunc: providerConfigure,

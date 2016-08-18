@@ -9,12 +9,12 @@ import (
 	vaultapi "github.com/hashicorp/vault/api"
 )
 
-func resourceVaultSecret() *schema.Resource {
+func dataSourceVaultSecret() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceServerCreate,
-		Read:   resourceServerRead,
-		Update: resourceServerUpdate,
-		Delete: resourceServerDelete,
+		Create: dataSourceServerCreate,
+		Read:   dataSourceServerRead,
+		Update: dataSourceServerUpdate,
+		Delete: dataSourceServerDelete,
 
 		Schema: map[string]*schema.Schema{
 			"path": &schema.Schema{
@@ -32,12 +32,12 @@ func resourceVaultSecret() *schema.Resource {
 }
 
 // No-op: Vault provider is currently read-only
-func resourceServerCreate(d *schema.ResourceData, m interface{}) error {
-	return resourceServerRead(d, m)
+func dataSourceServerCreate(d *schema.ResourceData, m interface{}) error {
+	return dataSourceServerRead(d, m)
 }
 
 // Reads a stored data set from the Vault server
-func resourceServerRead(d *schema.ResourceData, m interface{}) error {
+func dataSourceServerRead(d *schema.ResourceData, m interface{}) error {
 	vault := m.(*vaultapi.Client)
 
 	path := d.Get("path").(string)
@@ -78,12 +78,12 @@ func resourceDecode(str string) string {
 }
 
 // No-op: Vault provider is currently read-only
-func resourceServerUpdate(d *schema.ResourceData, m interface{}) error {
-	return resourceServerRead(d, m)
+func dataSourceServerUpdate(d *schema.ResourceData, m interface{}) error {
+	return dataSourceServerRead(d, m)
 }
 
 // No-op: Vault provider is currently read-only
-func resourceServerDelete(d *schema.ResourceData, m interface{}) error {
+func dataSourceServerDelete(d *schema.ResourceData, m interface{}) error {
 	d.SetId("")
 	return nil
 }
